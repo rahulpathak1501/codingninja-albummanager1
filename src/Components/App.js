@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./App.css";
-import UpdateAlbumForm from "./UpdateAlbumForm";
 
 function App() {
   const [albums, setAlbums] = useState([]);
@@ -13,31 +12,30 @@ function App() {
       .then((json) => setAlbums(json));
   }, []);
 
-  const handleDelete = (e) => {
-    //e.preventDefault();
+  const handleDelete = async (e) => {
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/albums/${e}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("Successfully deleted" + albums[e].title);
+      }
+    } catch (error) {
+      console.log(error);
+    }
 
-    fetch(`https://jsonplaceholder.typicode.com/albums?id=${e}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        // if (!response.ok) {
-        //   throw new Error(`Failed to delete album with ID ${e}`);
-        // }
-        const newAlbums = albums.filter((album) => album.id !== e);
-        setAlbums(newAlbums);
-        console.log(`Album with ID ${e} deleted successfully`);
-        return response.json();
-      })
-      .catch((error) => {
-        console.error(error.message);
-      });
-    console.log(e);
+    /*as we don't get direct deleted data we are updating the existed state here*/
+    const newAlbums = albums.filter((album) => album.id !== e);
+    setAlbums(newAlbums);
   };
 
-  const handleUpdate = (id, title) => {
-    // e.preventDefault();
-
-    // history.push(`/update-form/${id}`);
+  const handleUpdate = (id) => {
     navigate(`/update-form/${id}`);
   };
 
@@ -56,7 +54,7 @@ function App() {
                   <Link to={`/update-form/${album.id}`}>
                     <button
                       type="submit"
-                      onClick={() => handleUpdate(album.id, album.title)}
+                      onClick={() => handleUpdate(album.id)}
                     >
                       Update
                     </button>
@@ -71,6 +69,9 @@ function App() {
             ))}
           </tbody>
         </table>
+        <Link to="/add-album">
+          <button>Add A New Album</button>
+        </Link>
       </div>
     </div>
   );

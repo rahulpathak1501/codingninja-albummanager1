@@ -19,25 +19,43 @@ function UpdateAlbumForm() {
 
         const json = await response.json();
         setAlbums(json);
-        //console.log(json[id].title);
       } catch (error) {
         console.error("Error fetching albums:", error.message);
       }
     };
     fetchData();
-    //console.log(albums[1].title);
   }, []);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   onUpdate(albumId, title);
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (titles === "") {
+      alert("Please type a title");
+    }
+    try {
+      fetch(`https://jsonplaceholder.typicode.com/albums/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          id: id,
+          title: titles,
+          userId: albums[id].userId,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => console.log(json));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
-          value={albums[id].title}
+          defaultValue={albums[id]?.title || ""}
           onChange={(titles) => setTitle(titles.target.value)}
         ></input>
         <button> Submit</button>

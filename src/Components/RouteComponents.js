@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import App from "./App";
 import UpdateAlbumForm from "./UpdateAlbumForm";
+import AddAlbum from "./AddAlbum";
 
 function RoutComponents() {
   return (
@@ -9,6 +10,7 @@ function RoutComponents() {
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/update-form/:id" element={<UpdateAlbumForm />} />
+          <Route path="/add-album" element={<AddAlbum />} />
         </Routes>
       </Router>
     </>
