@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import "./AddAlbum.css";
 
 function AddAlbum() {
   const [albums, setAlbums] = useState([]);
   const [newAlbumTitle, setNewAlbumTitle] = useState("");
-  const id = albums.length !== 0 ? albums[albums.length - 1].id + 1 : "";
-  const userId =
-    albums.length !== 0 ? albums[albums.length - 1].userId + 1 : "";
+  // const id = albums.length !== 0 ? albums[albums.length - 1].id + 1 : "";
+  // const userId =
+  //   albums.length !== 0 ? albums[albums.length - 1].userId + 1 : "";
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/albums")
@@ -16,19 +17,29 @@ function AddAlbum() {
   const handleAddFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      fetch(`https://jsonplaceholder.typicode.com/albums`, {
-        method: "POST",
-        body: JSON.stringify({
-          id: id,
-          title: newAlbumTitle,
-          userId: userId,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+      const lastAlbum = albums[albums.length - 1];
+      const newId = lastAlbum ? lastAlbum.id + 1 : 1;
+      const newUserId = lastAlbum ? lastAlbum.userId + 1 : 1;
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/albums`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            id: newId,
+            title: newAlbumTitle,
+            userId: newUserId,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        }
+      );
+      if (response.ok) {
+        const updatedAlbums = await response.json();
+        console.log(updatedAlbums);
+        setAlbums([...albums, updatedAlbums]);
+        setNewAlbumTitle("");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -36,12 +47,11 @@ function AddAlbum() {
 
   return (
     <>
-      <form onSubmit={handleAddFormSubmit}>
-        {}
+      <form className="addAlbumForm" onSubmit={handleAddFormSubmit}>
         <label>ID</label>
         <input
           type="number"
-          value={albums.length !== 0 ? albums[albums.length - 1].id + 1 : ""}
+          value={albums.length !== 0 ? albums[albums.length - 1].id + 1 : 1}
           readOnly
         />
         <label>Title</label>
@@ -54,9 +64,7 @@ function AddAlbum() {
         <label>USERId</label>
         <input
           type="number"
-          value={
-            albums.length !== 0 ? albums[albums.length - 1].userId + 1 : ""
-          }
+          value={albums.length !== 0 ? albums[albums.length - 1].userId + 1 : 1}
           readOnly
         />
         <button>Submit</button>

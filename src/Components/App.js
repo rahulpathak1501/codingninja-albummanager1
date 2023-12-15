@@ -40,40 +40,51 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <div className="showAlbum">
-        <table>
-          <tbody>
-            <tr>
-              <th>Albums</th>
-            </tr>
-            {albums.map((album) => (
-              <tr key={album.id}>
-                <td>{album.title}</td>
-                <td>
-                  <Link to={`/update-form/${album.id}`}>
-                    <button
-                      type="submit"
-                      onClick={() => handleUpdate(album.id)}
-                    >
-                      Update
-                    </button>
-                  </Link>
-                </td>
-                <td>
-                  <button type="submit" onClick={() => handleDelete(album.id)}>
-                    Delete
-                  </button>
-                </td>
+    <>
+      <div className="container">
+        <div className="showAlbum">
+          <table className="albumTable">
+            <thead>
+              <tr>
+                <th>Albums</th>
+                <th></th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {albums.map((album) => (
+                <tr key={album.id}>
+                  <td>{album.title}</td>
+                  <td>
+                    <Link to={`/update-form/${album.id}`}>
+                      <button
+                        className="updateButton"
+                        type="submit"
+                        onClick={() => handleUpdate(album.id)}
+                      >
+                        Update
+                      </button>
+                    </Link>
+                  </td>
+                  <td>
+                    <button
+                      className="deleteButton"
+                      type="submit"
+                      onClick={() => handleDelete(album.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <Link to="/add-album">
-          <button>Add A New Album</button>
+          <button className="addAlbumButton">Add A New Album</button>
         </Link>
       </div>
-    </div>
+    </>
   );
 }
 
