@@ -18,6 +18,7 @@ function App() {
         `https://jsonplaceholder.typicode.com/albums/${e}`,
         {
           method: "DELETE",
+          mode: "cors",
           headers: {
             "Content-type": "application/json; charset=UTF-8",
           },
