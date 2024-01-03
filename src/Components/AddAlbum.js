@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
-import "./AddAlbum.css";
 
 function AddAlbum() {
   const [albums, setAlbums] = useState([]);
   const [newAlbumTitle, setNewAlbumTitle] = useState("");
-  // const id = albums.length !== 0 ? albums[albums.length - 1].id + 1 : "";
-  // const userId =
-  //   albums.length !== 0 ? albums[albums.length - 1].userId + 1 : "";
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/albums")
