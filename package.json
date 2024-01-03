@@ -2,7 +2,6 @@
   "homepage": "https://rahulpathak1501.github.io/codingninja-albummanager",
   "name": "albummanager",
   "version": "0.1.0",
-  
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -20,7 +19,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
-    
   },
   "eslintConfig": {
     "extends": [
