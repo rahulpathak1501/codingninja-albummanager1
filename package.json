@@ -1,7 +1,7 @@
 {
   "name": "albummanager",
   "version": "0.1.0",
-  "homepage": "https://rahulpathak1501.github.io/codingninja_albummanager",
+  "homepage": "https://rahulpathak1501.github.io/codingninja-albummanager",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
