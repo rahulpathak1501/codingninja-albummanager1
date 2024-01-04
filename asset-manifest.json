@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/codingninja-albummanager1/static/css/main.4695c6d9.css",
+    "main.js": "/codingninja-albummanager1/static/js/main.be0f0619.js",
+    "index.html": "/codingninja-albummanager1/index.html",
+    "main.4695c6d9.css.map": "/codingninja-albummanager1/static/css/main.4695c6d9.css.map",
+    "main.be0f0619.js.map": "/codingninja-albummanager1/static/js/main.be0f0619.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4695c6d9.css",
+    "static/js/main.be0f0619.js"
+  ]
+}
