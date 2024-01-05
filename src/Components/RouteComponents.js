@@ -6,7 +6,7 @@ import AddAlbum from "./AddAlbum";
 function RoutComponents() {
   return (
     <>
-      <Router>
+      <Router basename="/codingninja-albummanager1/">
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/update-form/:id" element={<UpdateAlbumForm />} />
